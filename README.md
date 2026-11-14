@@ -1,69 +1,33 @@
-# Subasta de Obras de Arte
+# 🎨 Subasta de Obras de Arte
 
-Web donde los artistas publican obras y los compradores pujan por ellas durante un tiempo limitado. Gana quien tenga la puja más alta cuando la subasta se cierra.
+**Proyecto de Software — Patrones de Diseño**
 
-## Tecnologías
-- **Backend:** Spring Boot (Java 21+) con API REST
-- **Frontend:** React (Vite)
-- **Base de datos:** PostgreSQL
+Aplicación web para la gestión, publicación y puja de obras de arte en tiempo real, implementando patrones de diseño creacionales, estructurales y de comportamiento.
 
-Flujo: React → API REST (Spring Boot) → PostgreSQL
+---
 
-## Requisitos previos
-- Java 21 o superior
-- Node.js y npm
-- PostgreSQL (se recomienda la versión 18; cualquier versión 15 en adelante funciona)
+## 1. Integrantes y Distribución
 
-## Cómo levantar el proyecto
+| Integrante | Rama | Módulo / Responsabilidad | Patrones Implementados |
+| :--- | :--- | :--- | :--- |
+| **Italo** | `feature/subastas` | Entidades base (`Obra`, `Subasta`), gestión de obras/subastas y estructura base del frontend. | **Factory** (subastas normales y con precio de reserva) |
+| **Antonio** | `feature/usuarios` | Gestión de usuarios, login, verificación y ciclo de vida de las subastas. | **Proxy** (control de acceso a pujas) y **State** (`Programada → Activa → Cerrada → Adjudicada`) |
+| **Jhairo** | `feature/pujas` | Sistema de pujas, cálculo de incrementos mínimos y actualización en pantalla. | **Strategy** (incremento fijo o porcentual) y **Observer** (notificaciones y actualización de precio) |
 
-### 1. Base de datos
-Con PostgreSQL instalado y encendido, crear la base de datos:
+---
 
-```sql
-CREATE DATABASE subasta_arte;
-```
+## 2. Tecnologías
 
-El proyecto usa por defecto el usuario `postgres` y la contraseña `postgres`. Si la tuya es distinta, **no edites el código**: define variables de entorno.
+* **Backend:** Java / Spring Boot *(ajusta la versión si aplica)*
+* **Frontend:** React, React Router y Hooks
+* **Control de Versiones:** Git & GitHub (Flujo basado en `main` ← `dev` ← `feature/*`)
 
-En CMD:
+---
 
-```bat
-set DB_USER=postgres
-set DB_PASSWORD=tu_contraseña
-```
+## 3. Estructura del Repositorio
 
-En PowerShell:
-
-```powershell
-$env:DB_USER="postgres"
-$env:DB_PASSWORD="tu_contraseña"
-```
-
-Las variables solo viven en esa ventana de terminal. Ejecuta el backend desde la misma ventana.
-
-### 2. Backend
-
-```bat
-cd backend\subasta-arte
-mvnw spring-boot:run
-```
-
-Corre en http://localhost:8080
-
-### 3. Frontend
-
-```bat
-cd frontend
-npm install
-npm run dev
-```
-
-Corre en http://localhost:5173
-
-## Estructura del backend
-
-Capas: `controller → service → repository → entity`
-
-```
-com.subasta
-├── controller/
+```text
+DS/
+├── backend/subasta-arte/    # API REST en Spring Boot (config, controller, dto, entity, exception, pattern, repository, service)
+├── frontend/                # Interfaz web en React + Vite
+└── README.md                # Documentación general del proyecto
