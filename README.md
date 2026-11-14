@@ -66,4 +66,33 @@ Capas: `controller → service → repository → entity`
 
 ```
 com.subasta
-├── controller/
+├── controller/    Endpoints REST (sin lógica de negocio)
+├── service/       Lógica de negocio
+├── repository/    Acceso a datos (Spring Data JPA)
+├── entity/        Entidades JPA
+├── dto/           Objetos de transferencia
+├── config/        Configuración (CORS, seguridad)
+├── exception/     Manejo de errores
+└── pattern/
+    ├── observer/
+    ├── state/
+    ├── proxy/
+    ├── factory/
+    └── strategy/
+```
+
+## Patrones de diseño
+- **Observer:** al pujar se actualiza el precio y se avisa a quien fue superado.
+- **State:** la subasta pasa por Programada → Activa → Cerrada → Adjudicada.
+- **Proxy:** controla quién puede pujar (solo usuarios verificados, nunca en su propia obra).
+- **Factory:** creación de tipos de subasta (normal o con precio de reserva).
+- **Strategy:** reglas de incremento mínimo de puja (fijo o porcentual).
+
+Además se aplican los principios **SOLID** en todo el código.
+
+## Reparto del trabajo
+| Integrante | Rama | Módulo | Patrones |
+|---|---|---|---|
+| 1 - Italo | `feature/subastas` | Obras y subastas, base del frontend | Factory |
+| 2 - Antonio | `feature/usuarios` | Usuarios, login, verificación, ciclo de vida y cierre de la subasta | Proxy, State |
+| 3 - Jhairo | `feature/pujas` | Pujas, notificaciones, precio en pantalla | Strategy, Observer |
